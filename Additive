@@ -1,0 +1,24 @@
+def additive_encrypt(plaintext, shift):
+    ciphertext = ''
+    for char in plaintext.upper():
+        if char.isalpha():
+            ciphertext += chr((ord(char) - 65 + shift) % 26 + 65)
+        else:
+            ciphertext += char
+    return ciphertext
+
+def additive_decrypt(ciphertext, shift):
+    plaintext = ''
+    for char in ciphertext.upper():
+        if char.isalpha():
+            plaintext += chr((ord(char) - 65 - shift) % 26 + 65)
+        else:
+            plaintext += char
+    return plaintext
+
+def additive_brute_force(ciphertext):
+    results = []
+    for shift in range(1, 26):
+        plaintext = additive_decrypt(ciphertext, shift)
+        results.append((shift, plaintext))
+    return results
